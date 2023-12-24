@@ -12,7 +12,7 @@ export default function EventsCard() {
                     <div>
 
                         {/* Title Event */}
-                        <Link as={NextLink} href='/wow' _hover={{ textDecoration: 'none' }}>
+                        <Link as={NextLink} href='/events/wow' _hover={{ textDecoration: 'none' }}>
                             <Text color={'grey'}>12 Desember 2023</Text>
                             <Text fontSize={'md'} mt={3} fontWeight={'semibold'}>Yoga Mengenal Jenis-Jenis Yoga dan Manfaatnya Bagi Kesehatan</Text>
                         </Link>

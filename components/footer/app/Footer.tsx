@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <Box borderTop={'1px solid #ddd'} py={10} px={10}>
+        <Box borderTop={'1px solid #ddd'} py={10} px={10} bgColor={'white'}>
             <Grid templateColumns='repeat(5, 1fr)' gap={6}>
                 <GridItem colSpan={2} w='100%' paddingRight={20}>
                     <Image src={SobatSehatDarkLogo.src} alt='Sobat Sehat Logo' w={'200px'}></Image>

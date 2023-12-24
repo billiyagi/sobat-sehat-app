@@ -7,8 +7,7 @@ import NewsHorizontalCard from '@/components/card/news/NewsHorizontalCard';
 import NextLink from 'next/link';
 import Footer from '@/components/footer/app/Footer';
 
-import { Button, ButtonGroup, Box, Text, Center, Flex, Image, Spacer, Badge, Grid, Link } from '@chakra-ui/react'
-import { fonts } from '@/app/fonts';
+import { Heading, Box, Text, Center, Flex, Image, Spacer, Badge, Grid, Link } from '@chakra-ui/react';
 
 export default function Home() {
     const sobatSehatColor = '#fba600';
@@ -23,8 +22,8 @@ export default function Home() {
 
                 <Center position={'relative'} textAlign={'center'} w={'100%'}>
                     <Box>
-                        <Text fontSize={'6xl'} color={'white'} className={fonts.montserrat.variable} fontWeight={'semibold'}>Bertransformasi Menuju</Text>
-                        <Text fontSize={'6xl'} color={'white'} className={fonts.montserrat.variable} fontWeight={'semibold'}> <span style={{ color: sobatSehatColor }}>Kesehatan</span> Optimal</Text>
+                        <Heading as={'h1'} fontSize={'6xl'} color={'white'} fontWeight={'semibold'}>Bertransformasi Menuju</Heading>
+                        <Heading as={'h1'} fontSize={'6xl'} color={'white'} fontWeight={'semibold'}> <span style={{ color: sobatSehatColor }}>Kesehatan</span> Optimal</Heading>
                     </Box>
 
                 </Center>
@@ -33,12 +32,13 @@ export default function Home() {
 
 
             <Box bgImage={`url(${HomeBackground.src})`} px={{ base: "10px", sm: "15px", md: 200 }} py={'80px'}>
+
                 {/* Intro */}
                 <Flex mb={'200px'}>
                     <Center>
                         <Box paddingRight={200}>
                             <Badge color={'white'} px={5} py={1} rounded={20} bgColor={sobatSehatColor}>Hidup Sehat</Badge>
-                            <Text fontSize={'4xl'} fontWeight={'extrabold'} className={fonts.montserrat.variable}>Memulai Hidup Lebih Baik, Lebih Sehat</Text>
+                            <Heading fontSize={'4xl'} fontWeight={'extrabold'} lineHeight={1.7}>Memulai Hidup Lebih Baik, Lebih Sehat</Heading>
                             <Text fontSize={'2xl'} fontWeight={'light'} marginTop={5}>Bergabung dengan komunitas sobat sehat, ikuti berbagai kegiatan yang dibagikan oleh komunitas secara luas.</Text>
                         </Box>
                     </Center>
@@ -53,19 +53,19 @@ export default function Home() {
                     <Center>
                         <Box paddingLeft={70}>
                             <Badge color={'white'} px={5} py={1} rounded={20} bgColor={sobatSehatColor}>Komunitas</Badge>
-                            <Text fontSize={'4xl'} fontWeight={'extrabold'} className={fonts.montserrat.variable}>Langsung dari Komunitas, untuk Komunitas</Text>
+                            <Heading fontSize={'4xl'} fontWeight={'extrabold'} lineHeight={1.7}>Langsung dari Komunitas, untuk Komunitas</Heading>
                             <Text fontSize={'2xl'} fontWeight={'light'} marginTop={5}>Informasi kegiatan olahraga diberikan dan diliput langsung dari komunitas dan instansi olahraga, untuk dibagikan dengan masyarakat luas</Text>
                         </Box>
                     </Center>
                 </Flex>
 
-                {/* Events Recently */}
+                {/* News Recently */}
                 <Box mt={60}>
                     <Center>
-                        <Text fontSize={'4xl'} fontWeight={'extrabold'} className={fonts.montserrat.variable}>Kegiatan Olahraga Terkini</Text>
+                        <Heading fontSize={'4xl'} fontWeight={'extrabold'} lineHeight={1.7}>Kegiatan Olahraga Terkini</Heading>
                     </Center>
 
-
+                    {/* List News */}
                     <Grid templateColumns='repeat(2, 1fr)' gap={6} mt={20}>
                         <NewsHorizontalCard />
                         <NewsHorizontalCard />

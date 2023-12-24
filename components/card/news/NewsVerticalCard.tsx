@@ -5,7 +5,7 @@ import { BsDot } from "react-icons/bs";
 
 export default function NewsVerticalCard() {
     return (
-        <Link as={NextLink} href='/' _hover={{ textDecoration: 'none' }} mb={8}>
+        <Link as={NextLink} href='/news/wow' _hover={{ textDecoration: 'none' }} mb={8}>
             <Card shadow={'none'}>
                 {/* Thumbnail */}
                 <Image src='https://picsum.photos/500/300' alt='Thumbnail Featured News' h={'250px'} w='100%' objectFit={'cover'} rounded={20}></Image>

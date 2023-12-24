@@ -9,13 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/montserrat": "^5.0.17",
+    "@fontsource-variable/nunito": "^5.0.17",
+    "@tanstack/react-table": "^8.11.2",
+    "apexcharts": "^3.45.1",
     "framer-motion": "^10.16.16",
     "next": "14.0.4",
     "react": "^18",
+    "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
     "react-icons": "^4.12.0"
   },
