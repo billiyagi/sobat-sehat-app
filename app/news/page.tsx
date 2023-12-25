@@ -1,9 +1,13 @@
 import React from 'react'
 import FeaturedNewsCard from '@/components/card/news/FeaturedNewsCard'
-import NewsVerticalCard from '@/components/card/news/NewsVerticalCard'
 import { Text, Grid, Divider, Flex, Center } from '@chakra-ui/react'
+import ListNews from '@/partials/ListNews'
+import { cookies } from 'next/headers'
+import NewsVerticalCard from '@/components/card/news/NewsVerticalCard'
+import axios from 'axios'
 
-export default function News() {
+export default async function News() {
+    const getNews = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/news`);
     return (
         <>
             <FeaturedNewsCard />
@@ -15,13 +19,8 @@ export default function News() {
                     <Divider orientation='horizontal' />
                 </Center>
             </Flex>
-            <Grid templateColumns='repeat(4, 1fr)' gap={6}>
-                <NewsVerticalCard />
-                <NewsVerticalCard />
-                <NewsVerticalCard />
-                <NewsVerticalCard />
-                <NewsVerticalCard />
-            </Grid>
+            <ListNews dataNews={getNews.data.data} />
+
         </>
     )
 }

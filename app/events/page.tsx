@@ -1,22 +1,22 @@
 import React from 'react'
 import FeaturedEventCard from '@/components/card/events/FeaturedEventCard'
-import { Text, Grid } from '@chakra-ui/react'
+import { Text, Grid, Box } from '@chakra-ui/react'
 import EventsCard from '@/components/card/events/EventsCard';
+import ListEvents from '@/partials/ListEvents';
+import axios from 'axios';
 
-export default function Events() {
+export default async function Events() {
+    const getEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events`);
+    const getFeaturedEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events/show/featured`);
+
+    const featuredEvents = getFeaturedEvents.data.data[0];
+    const events = getEvents.data.data;
     return (
         <>
-            <FeaturedEventCard />
+            <FeaturedEventCard thumbnail={featuredEvents.thumbnail} title={featuredEvents.name} location={featuredEvents.location_at} />
 
             <Text fontSize={'2xl'} fontWeight={'bold'} my={10}>Jadwal Lainnya</Text>
-            <Grid templateColumns='repeat(3, 1fr)' gap={4}>
-                <EventsCard />
-                <EventsCard />
-                <EventsCard />
-                <EventsCard />
-                <EventsCard />
-                <EventsCard />
-            </Grid>
+            <ListEvents events={events} />
         </>
     )
 }

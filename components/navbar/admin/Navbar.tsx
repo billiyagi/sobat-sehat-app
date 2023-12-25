@@ -5,6 +5,7 @@ import { Image, ResponsiveValue } from '@chakra-ui/react';
 import { Button, ButtonGroup, Box, Text, Flex, Center, Square, Spacer, Link, Menu, MenuButton, MenuList, MenuItem, Avatar, AvatarBadge } from '@chakra-ui/react'
 import NextLink from 'next/link';
 import { LuDot } from "react-icons/lu";
+import { usePathname } from 'next/navigation';
 
 
 export default function Navbar(params:
@@ -30,12 +31,6 @@ export default function Navbar(params:
 
                 {/* Menus */}
                 <Center >
-
-
-                    {/* Search Modal
-                    <Box mx={'20px'}>
-                        <Button><MdDarkMode /></Button>
-                    </Box> */}
 
 
                     {/* Login */}

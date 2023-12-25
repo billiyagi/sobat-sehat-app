@@ -1,15 +1,28 @@
 import React from 'react'
-import { Text, Grid, Box, Image, GridItem, Card, Link, Flex, Center, Avatar, Input, Button } from '@chakra-ui/react'
+import { Text, Grid, Box, Image, GridItem, Card, Link, Flex, Center, Avatar, Input, Button, Heading } from '@chakra-ui/react'
 import { IoMdPin } from "react-icons/io";
 import CommentsEventCard from '@/components/card/events/CommentsEventCard';
+import axios from 'axios';
+import NextLink from 'next/link';
+import { cookies } from 'next/headers'
 
-export default function Page() {
+export default async function Page({ params }: { params: { slug: string } }) {
+    const getEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events/show/${params.slug}`);
+
+    const token: any = cookies().get('token');
+    const getUser = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {}, {
+        headers: {
+            Authorization: `Bearer ${token.value}`
+        }
+    })
+    const events = getEvents.data.data;
+
     return (
         <>
             <Box position={'relative'} rounded={20} overflow={'hidden'} mb={10}>
 
                 {/* Thumbnail Image */}
-                <Image src={'https://picsum.photos/500/300'} alt='Thumbnail Featured Event' h={'500px'} w='100%' objectFit={'cover'}></Image>
+                <Image src={`${process.env.NEXT_PUBLIC_URL}/storage${events.thumbnail}`} alt={`Thumbnail Event of ${events.name}`} h={'500px'} w='100%' objectFit={'cover'}></Image>
                 <Box bgGradient={'linear(to-t, black 2%, transparent, transparent, transparent)'} h={'100%'} w={'100%'} position={'absolute'} top={0} left={0}></Box>
 
                 {/* Title Events */}
@@ -17,21 +30,21 @@ export default function Page() {
                     <Flex>
                         <Center>
                             <Text color={'#ef3a2d'} mr={2}><IoMdPin /></Text>
-                            <Text>Stadion Pakansari</Text>
+                            <Link as={NextLink} href={events.link_location}>{events.location_at}</Link>
                         </Center>
                     </Flex>
-                    <Text fontSize={'3xl'} fontWeight={'bold'} >Yoga Mengenal Jenis-Jenis Yoga dan Manfaatnya Bagi Kesehatan</Text>
+                    <Heading fontSize={'3xl'} fontWeight={'bold'} >{events.name}</Heading>
                 </Box>
             </Box>
 
             <Grid templateColumns='repeat(3, 1fr)' gap={6}>
                 <GridItem w='100%' colSpan={2}>
-                    <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis consequatur rerum eveniet vero consectetur tempore accusamus aut, voluptas molestias, quasi incidunt eaque soluta esse blanditiis nemo a quam laborum? Sit?
-                        Qui quasi nemo, mollitia molestias sint iste. Praesentium, quas. At illo aliquam, modi molestias ipsum laboriosam voluptates eum quo qui vitae debitis eius hic vel ut necessitatibus minima sed reiciendis?
-                        Est modi laboriosam voluptates dolore quia quo animi distinctio, harum illum impedit odit suscipit fuga ducimus ipsam iusto? Culpa, dolore aliquid ea sapiente reiciendis enim pariatur quibusdam iure necessitatibus nam!</Text>
+                    <Box>
+                        {events.description}
+                    </Box>
                 </GridItem>
                 <GridItem w='100%' colSpan={1}>
-                    <CommentsEventCard />
+                    <CommentsEventCard user={getUser.data.user} />
                 </GridItem>
             </Grid>
         </>

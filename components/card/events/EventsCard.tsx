@@ -4,7 +4,7 @@ import CommunityImg from '@/public/img/ilustration/home-community.jpg';
 import NextLink from 'next/link';
 import { FaBookmark } from "react-icons/fa6";
 
-export default function EventsCard() {
+export default function EventsCard(params: { name: string, date: string, slug: string, thumbnail: string }) {
     return (
         <>
             <Card p={'20px 20px'}>
@@ -12,9 +12,9 @@ export default function EventsCard() {
                     <div>
 
                         {/* Title Event */}
-                        <Link as={NextLink} href='/events/wow' _hover={{ textDecoration: 'none' }}>
-                            <Text color={'grey'}>12 Desember 2023</Text>
-                            <Text fontSize={'md'} mt={3} fontWeight={'semibold'}>Yoga Mengenal Jenis-Jenis Yoga dan Manfaatnya Bagi Kesehatan</Text>
+                        <Link as={NextLink} href={`/events/${params.slug}`} _hover={{ textDecoration: 'none' }}>
+                            <Text color={'grey'}>{params.date}</Text>
+                            <Text fontSize={'md'} mt={3} fontWeight={'semibold'}>{params.name}</Text>
                         </Link>
 
                         {/* Daftar Event Button */}
@@ -30,7 +30,7 @@ export default function EventsCard() {
                     <Spacer />
 
                     {/* Thumbnail */}
-                    <Image src={CommunityImg.src} alt='thumbnail' w={'150px'} rounded={10} objectFit={'cover'}></Image>
+                    <Image src={`${process.env.NEXT_PUBLIC_URL}/storage${params.thumbnail}`} alt='thumbnail' w={'150px'} rounded={10} objectFit={'cover'}></Image>
                 </Flex>
             </Card>
         </>

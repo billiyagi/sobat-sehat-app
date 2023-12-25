@@ -5,14 +5,21 @@ import React, { useEffect } from 'react'
 import SobatSehatLogo from '@/public/img/logo/Sobat-Sehat-Horizontal.svg'
 import SobatSehatDarkLogo from '@/public/img/logo/Sobat-Sehat-Dark-Horizontal.svg'
 import { Image, ResponsiveValue } from '@chakra-ui/react';
-import { fonts } from '@/app/fonts';
-import { Button, ButtonGroup, Box, Text, Flex, Center, Square, Spacer, Link } from '@chakra-ui/react'
+import { Button, ButtonGroup, Box, Text, Flex, Center, Square, Spacer, Link, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import NextLink from 'next/link';
+import { HiChevronDown } from "react-icons/hi";
+import { TbLogout } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
+import { getCookie, removeCookie } from 'typescript-cookie';
+import axios from 'axios';
+import LoginModal from './LoginModal';
 
 export default function NavbarTransparent(params:
     { position: ResponsiveValue<'fixed' | 'absolute' | 'relative' | 'static' | 'sticky'> }) {
 
     const [scroll, setScroll] = React.useState(false);
+
+    const [user, setUser]: any = React.useState(false);
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -22,8 +29,34 @@ export default function NavbarTransparent(params:
                 setScroll(false);
             }
         })
+
+        const token: any = getCookie('token');
+        axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/api/auth/me',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            setUser(response.data.user);
+        }).catch((err) => { });
     }, [])
 
+
+
+    const handleLogout = async () => {
+        const token: any = getCookie('token');
+        axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/api/auth/logout',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            removeCookie('token');
+            setUser(false);
+        }).catch((err) => { });
+    }
 
     return (
         <>
@@ -43,7 +76,25 @@ export default function NavbarTransparent(params:
                         </Center>
                     </Flex>
 
-                    <Button bgColor={scroll ? 'black' : 'white'} color={scroll ? 'white' : 'black'} px={'30px'}>Login</Button>
+                    {user ?
+                        <>
+                            <Menu>
+                                <MenuButton as={Button} rightIcon={<HiChevronDown />}>
+                                    {user.name}
+                                </MenuButton>
+                                <MenuList>
+                                    <MenuItem>
+                                        <Text mr={2}>
+                                            <CgProfile />
+                                        </Text>
+                                        Profile</MenuItem>
+                                    <MenuItem onClick={handleLogout}>
+                                        <Text mr={2}><TbLogout /></Text>
+                                        Logout</MenuItem>
+                                </MenuList>
+                            </Menu>
+                        </> : <LoginModal />}
+
                 </Center>
             </Flex>
         </>
