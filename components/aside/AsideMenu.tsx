@@ -56,7 +56,7 @@ export default function AsideMenu() {
     // Looping Menu
     const menus = listMenu.map((menu, index) => {
         return (
-            <Link href={menu.path} textAlign={'left'} _hover={{ textDecoration: 'none' }} key={index}>
+            <Link as={NextLink} href={menu.path} textAlign={'left'} _hover={{ textDecoration: 'none' }} key={index}>
                 <Box px={'15px'} py={'7px'} rounded={10} fontWeight={'semibold'} bg={pathNameThisPage == menu.path ? '#efefef' : ''} _hover={{ backgroundColor: '#efefef' }}>
                     <Flex>
                         <Center>

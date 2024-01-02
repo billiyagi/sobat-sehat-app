@@ -5,16 +5,13 @@ import CommentsEventCard from '@/components/card/events/CommentsEventCard';
 import axios from 'axios';
 import NextLink from 'next/link';
 import { cookies } from 'next/headers'
+import { FaRunning } from "react-icons/fa";
+import { MdEmojiPeople } from "react-icons/md";
+import RegisterEventCard from '@/components/card/events/RegisterEventCard';
 
 export default async function Page({ params }: { params: { slug: string } }) {
+    // get data events by ID
     const getEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events/show/${params.slug}`);
-
-    const token: any = cookies().get('token');
-    const getUser = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {}, {
-        headers: {
-            Authorization: `Bearer ${token.value}`
-        }
-    })
     const events = getEvents.data.data;
 
     return (
@@ -29,7 +26,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <Box position={'absolute'} bottom={0} left={0} color={'white'} py={7} px={5} zIndex={2} w={'70%'}>
                     <Flex>
                         <Center>
-                            <Text color={'#ef3a2d'} mr={2}><IoMdPin /></Text>
+                            <Text color={'#ef3a2d'} mr={2}>
+                                <IoMdPin />
+                            </Text>
                             <Link as={NextLink} href={events.link_location}>{events.location_at}</Link>
                         </Center>
                     </Flex>
@@ -37,14 +36,40 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </Box>
             </Box>
 
+            {/* Content Events */}
             <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+
+                {/* Detail Events */}
                 <GridItem w='100%' colSpan={2}>
+                    <Box bg={'#efefef'} px={5} py={4} rounded={10} mb={10}>
+                        <Flex justifyContent={'space-between'}>
+                            <Flex>
+                                <Center>
+                                    <Box bg={'#0a69cf'} p={1} rounded={100} color={'#fff'} mr={2}>
+                                        <FaRunning />
+                                    </Box>
+                                    <Text>Dimulai pada {events.start_at}</Text>
+                                </Center>
+                            </Flex>
+                            <Flex>
+                                <Center>
+                                    <Box bg={'#06c222'} p={1} rounded={100} color={'#fff'} mr={2}>
+                                        <MdEmojiPeople />
+                                    </Box>
+                                    <Text>Berakhir pada {events.end_at}</Text>
+                                </Center>
+                            </Flex>
+                        </Flex>
+                    </Box>
                     <Box>
                         {events.description}
                     </Box>
                 </GridItem>
+
+                {/* Comments Events */}
                 <GridItem w='100%' colSpan={1}>
-                    <CommentsEventCard user={getUser.data.user} />
+                    <RegisterEventCard event={events} />
+                    <CommentsEventCard event={events} />
                 </GridItem>
             </Grid>
         </>

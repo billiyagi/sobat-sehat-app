@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter, useDisclosure, Input, Flex, Text, Box, Heading, Stack, StackDivider, Badge, Select } from '@chakra-ui/react'
+import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter, useDisclosure, Input, Flex, Text, Box, Heading, Stack, StackDivider, Badge, Select, Link } from '@chakra-ui/react'
 import { FaSearch } from "react-icons/fa";
 import axios from 'axios';
 
@@ -69,7 +69,7 @@ export default function SearchModal(params: { token: string }) {
                             <Stack divider={<StackDivider />} spacing='4' mt={10}>
                                 {searchResult.type == 'events' ? (
                                     searchResult.result.map((result: any, index: number) => (
-                                        <Box key={index}>
+                                        <Link href={`/events/${result.slug}`} key={index}>
                                             <Badge colorScheme='green' mb={2}>Kegiatan</Badge>
                                             <Heading size='xs' textTransform='uppercase'>
                                                 {result.name}
@@ -77,7 +77,7 @@ export default function SearchModal(params: { token: string }) {
                                             <Text pt='2' fontSize='sm'>
                                                 oleh {result.author.name}, Lokasi di {result.location_at}
                                             </Text>
-                                        </Box>
+                                        </Link>
                                     ))
                                 ) : (
                                     searchResult.result.map((result: any, index: number) => (

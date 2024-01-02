@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
                     {/* Konten News */}
                     <Box my={7}>
-                        {news.content}
+                        <div dangerouslySetInnerHTML={{ __html: news.content }} />
                     </Box>
                 </GridItem>
 

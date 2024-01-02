@@ -20,21 +20,19 @@ import {
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import UsersTable from '@/components/table/UsersTable';
+import SubscribersTable from '@/components/table/SubcribersTable';
 import { cookies } from 'next/headers';
 
-export default function Users() {
+export default function Subscribers() {
     // const table = useReactTable(options)
     const token: any = cookies().get('token');
     return (
         <Box >
             <Flex mb={10} justify={'space-between'} alignItems={'center'}>
-                <Heading as={'h1'} size={'lg'}>Users</Heading>
-                <Link as={NextLink} href="/dashboard/users/create" bg={'white'}>
-                    <Button colorScheme='blue'>Create User</Button>
-                </Link>
+                <Heading as={'h1'} size={'lg'}>Subscribers</Heading>
             </Flex>
             <Box bg={'white'} p={5} rounded={10} shadow={'lg'}>
-                <UsersTable token={token.value} />
+                <SubscribersTable token={token.value} />
             </Box>
         </Box>
     )

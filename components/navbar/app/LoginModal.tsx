@@ -40,24 +40,34 @@ export default function LoginModal() {
             }
         }
 
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-            email: userInput.email,
-            password: userInput.password
-        }, requestHeader).then((response) => {
-            setCookie('token', response.data.authorisation.token, { expires: 1 });
-            setUser(response.data.user);
-        }).catch((err) => {
+        // Send request to API
+        try {
+            // Get user token from API
+            const getToken = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+                email: userInput.email,
+                password: userInput.password
+            }, requestHeader)
+
+            // set Cookie token
+            setCookie('token', getToken.data.authorisation.token, { expires: 1 });
+
+            // Set user data to state
+            setUser(getToken.data.user);
+
+            // Get user data from API
+            if (getToken.data.user.role == 'admin' || getToken.data.user.role == 'kontributor') {
+                // Redirect to dashboard
+                window.location.replace('/dashboard');
+            } else {
+                // Reload the page
+                window.location.reload();
+            }
+
+
+        } catch (err) {
             setError(true);
             setLoading(false);
-        });
-
-        if (user.role == 'admin' || user.role == 'kontributor') {
-            router.replace('/dashboard')
         }
-
-        // Reload the page
-        window.location.reload();
-
     }
 
 
@@ -86,7 +96,7 @@ export default function LoginModal() {
 
                                 <Input placeholder='yourmail@example.com' size='md' mb={'20px'} name='email' type='email' />
                                 <Input placeholder='password' size='md' mb={'20px'} name='password' type='password' />
-                                {loading ? <Button isLoading colorScheme='yellow' w={'100%'} type='submit' spinnerPlacement='start'>Button</Button> : <Button colorScheme='yellow' w={'100%'} type='submit'>Button</Button>}
+                                {loading ? <Button isLoading colorScheme='yellow' w={'100%'} type='submit' spinnerPlacement='start'>Login</Button> : <Button colorScheme='yellow' w={'100%'} type='submit'>Login</Button>}
                             </form>
                         </>}
                     </ModalBody>
