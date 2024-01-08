@@ -4,6 +4,7 @@ import NextLink from 'next/link'
 import { BsDot } from "react-icons/bs";
 
 export default function NewsVerticalCard(params: { slug: string, thumbnail: string, author: any, category: any, title: string, content: string, published: string }) {
+    let newsContent = params.content.replace(/<[^>]*>/g, '');
     return (
         <Link as={NextLink} href={`/news/${params.slug}`} _hover={{ textDecoration: 'none' }} mb={8}>
             <Card shadow={'none'}>
@@ -24,13 +25,12 @@ export default function NewsVerticalCard(params: { slug: string, thumbnail: stri
                     </Center>
                 </Flex>
 
-                <Text fontWeight={'semibold'} fontSize={'lg'}>
+                <Text fontWeight={'semibold'} fontSize={'lg'} mb={2}>
                     {params.title}
                 </Text>
-                <Text fontSize={'sm'} my={3}>
-                    Yoga adalah salah satu jenis olahraga yang pamornya terus menanjak di mata publik dalam beberapa tahun belakangan. Tapi, apakah Anda tahu sepert? ...
+                <Text mb={5} opacity={'.7'}>
+                    {newsContent.substring(1, 150)}
                 </Text>
-
                 <Text fontSize={'xs'} color={'gray'}>
                     {params.published}
                 </Text>

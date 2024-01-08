@@ -12,21 +12,11 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
     const allowedRoles = ['admin', 'kontributor'];
 
-    // const checkAuthenticated = await fetch(`${process.env.APP_URL}/api/authenticated`, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //     }
-    // })
-
 
     if (token) {
         const user: any = jwtDecode(token.value);
         // Check if user not authenticated
         const tokenExpired = user.exp < Date.now() / 1000;
-        // if (tokenExpired) {
-        //     return checkAuthenticated;
-        // }
 
 
         // Check if user not admin or kontributor

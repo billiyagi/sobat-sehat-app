@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Button, Modal, ModalOverlay, ModalBody, ModalFooter, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, Input, Image, Alert, AlertIcon, AlertTitle, AlertDescription, Box, Text, Flex, Center } from '@chakra-ui/react'
+import { Button, Modal, ModalOverlay, ModalBody, ModalFooter, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, Input, Image, Alert, AlertIcon, AlertTitle, AlertDescription, Box, Text, Flex, Center, Link } from '@chakra-ui/react'
 import SobatSehatDarkLogo from '@/public/img/logo/Sobat-Sehat-Dark-Horizontal.svg'
 import axios from 'axios'
 import { useState } from 'react'
@@ -9,6 +9,7 @@ import { getCookie, setCookie } from 'typescript-cookie'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaCircleCheck } from "react-icons/fa6";
+import NextLink from 'next/link'
 
 export default function LoginModal() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -94,9 +95,14 @@ export default function LoginModal() {
                                     <AlertDescription>Email / Password Salah</AlertDescription>
                                 </Alert> : ''}
 
-                                <Input placeholder='yourmail@example.com' size='md' mb={'20px'} name='email' type='email' />
+                                <Input placeholder='email@contoh.com' size='md' mb={'20px'} name='email' type='email' />
                                 <Input placeholder='password' size='md' mb={'20px'} name='password' type='password' />
                                 {loading ? <Button isLoading colorScheme='yellow' w={'100%'} type='submit' spinnerPlacement='start'>Login</Button> : <Button colorScheme='yellow' w={'100%'} type='submit'>Login</Button>}
+                                <Center mt={4}>
+                                    <Link as={NextLink} href='/register' textAlign={'center'}>
+                                        Belum mendaftar? Daftar disini
+                                    </Link>
+                                </Center>
                             </form>
                         </>}
                     </ModalBody>

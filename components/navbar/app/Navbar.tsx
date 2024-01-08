@@ -19,7 +19,7 @@ export default function Navbar(params: { position: ResponsiveValue<'fixed' | 'ab
 
     const [user, setUser]: any = useState(false);
     const [token, setToken]: any = useState(false);
-    const [recentEvent, setRecentEvent]: any = useState(false);
+    const [recentEvent, setRecentEvent]: any = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [show, setShow] = React.useState(false)
     const [error, setError] = useState({
@@ -58,12 +58,12 @@ export default function Navbar(params: { position: ResponsiveValue<'fixed' | 'ab
         Get Recent Event
     */
     useEffect(() => {
-        axios({
-            method: 'get',
-            url: `${process.env.NEXT_PUBLIC_API_URL}/events/show/featured`,
-        }).then((response) => {
-            setRecentEvent(response.data.data);
-        });
+        // axios({
+        //     method: 'get',
+        //     url: `${process.env.NEXT_PUBLIC_API_URL}/events/on/featured`,
+        // }).then((response) => {
+        //     // setRecentEvent(response.data.data[0].name);
+        // });
     }, [])
 
     /*
@@ -119,7 +119,6 @@ export default function Navbar(params: { position: ResponsiveValue<'fixed' | 'ab
                 'status': 'error',
                 'message': 'kolom tidak boleh kosong'
             })
-            console.log(err);
         })
 
         e.currentTarget.password.value = '';
@@ -137,7 +136,7 @@ export default function Navbar(params: { position: ResponsiveValue<'fixed' | 'ab
                         <Flex>
                             <Text fontSize={'xs'}>Kegiatan Terbaru</Text>
                             <LuDot />
-                            <Text fontSize={'xs'}></Text>
+                            {/* <Text fontSize={'xs'}>{recentEvent}</Text> */}
                         </Flex>
                     </Box>
                 </Center>

@@ -4,7 +4,6 @@ import FeaturedEventImage from '@/public/img/ilustration/example-featured-event.
 import { IoMdPin } from "react-icons/io";
 
 export default function FeaturedEventCard(params: { thumbnail: string, title: string, location: string }) {
-    console.log(params)
     return (
         <Link href='/test'>
             <Box position={'relative'} rounded={20} overflow={'hidden'}>

@@ -8,9 +8,10 @@ import axios from 'axios'
 
 export default async function News() {
     const getNews = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/news`);
+    const getFeaturedEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/news/on/featured`);
     return (
         <>
-            <FeaturedNewsCard />
+            <FeaturedNewsCard news={getFeaturedEvents.data.data[0]} />
 
             <Flex>
 

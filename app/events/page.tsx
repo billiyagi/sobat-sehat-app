@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export default async function Events() {
     const getEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events`);
-    const getFeaturedEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events/show/featured`);
+    const getFeaturedEvents = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events/on/featured`);
 
     const featuredEvents = getFeaturedEvents.data.data[0];
     const events = getEvents.data.data;

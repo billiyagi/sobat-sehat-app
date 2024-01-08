@@ -6,11 +6,11 @@ import { Text } from "@chakra-ui/react";
 export default function DataGrowing() {
     const data: any = {
         series: [{
-            name: 'series1',
-            data: [0, 40, 28, 51, 42, 109, 100, 100, 100, 100, 100, 100],
+            name: 'News',
+            data: [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         }, {
-            name: 'series2',
-            data: [11, 32, 45, 32, 34, 52, 41, 100, 100, 100, 100, 100]
+            name: 'Events',
+            data: [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }],
         options: {
             chart: {

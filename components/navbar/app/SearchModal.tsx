@@ -81,7 +81,7 @@ export default function SearchModal(params: { token: string }) {
                                     ))
                                 ) : (
                                     searchResult.result.map((result: any, index: number) => (
-                                        <Box key={index}>
+                                        <Link href={`/news/${result.slug}`} key={index}>
                                             <Badge colorScheme='blue' mb={2}>Berita</Badge>
                                             <Heading size='xs' textTransform='capitalize'>
                                                 {result.title}
@@ -89,7 +89,7 @@ export default function SearchModal(params: { token: string }) {
                                             <Text pt='2' fontSize='sm'>
                                                 oleh {result.author.name}, di {result.category.name}
                                             </Text>
-                                        </Box>
+                                        </Link>
                                     ))
                                 )}
                             </Stack>
