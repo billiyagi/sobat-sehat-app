@@ -8,7 +8,7 @@ import NextLink from 'next/link';
 import Footer from '@/components/footer/app/Footer';
 
 import { Heading, Box, Text, Center, Flex, Image, Spacer, Badge, Grid, Link } from '@chakra-ui/react';
-
+import ListNewsHomeCard from '@/components/card/news/ListNewsHomeCard';
 export default function Home() {
     const sobatSehatColor = '#fba600';
     return (
@@ -66,12 +66,7 @@ export default function Home() {
                     </Center>
 
                     {/* List News */}
-                    <Grid templateColumns='repeat(2, 1fr)' gap={6} mt={20}>
-                        <NewsHorizontalCard />
-                        <NewsHorizontalCard />
-                        <NewsHorizontalCard />
-                        <NewsHorizontalCard />
-                    </Grid>
+                    <ListNewsHomeCard />
 
                     <Center mt={20}>
                         <Link as={NextLink} href='/news' bgColor={sobatSehatColor} p={'10px 25px'} rounded={10} color={'#ffff'} _hover={{ textDecoration: 'none' }}>Lihat Semua</Link>
