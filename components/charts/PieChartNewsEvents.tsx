@@ -32,7 +32,7 @@ export default function PieChartNewsEvents(params: { news: number, events: numbe
     };
     return (
         <>
-            {/* <Chart options={data.options} series={data.series} type="pie" width={'100%'} height={'90%'}></Chart> */}
+            <Chart options={data.options} series={data.series} type="pie" width={'100%'} height={'90%'}></Chart>
         </>
     )
 }
