@@ -3,7 +3,7 @@ import { Link, Card, Image, Flex, Box, Text, Avatar, Center } from '@chakra-ui/r
 import NextLink from 'next/link'
 import { BsDot } from "react-icons/bs";
 
-export default function FeaturedNewsCard(params: { news: any }) {
+export default async function FeaturedNewsCard(params: { news: any }) {
 
     // Remove HTML Tags
     let newsContent = params.news.content.replace(/<[^>]*>/g, '');

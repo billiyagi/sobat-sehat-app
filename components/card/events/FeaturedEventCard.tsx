@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Box, Text, Flex, Center, Square, Spacer, Link, Ima
 import FeaturedEventImage from '@/public/img/ilustration/example-featured-event.jpg';
 import { IoMdPin } from "react-icons/io";
 
-export default function FeaturedEventCard(params: { thumbnail: string, title: string, location: string }) {
+export default async function FeaturedEventCard(params: { thumbnail: string, title: string, location: string }) {
     return (
         <Link href='/test'>
             <Box position={'relative'} rounded={20} overflow={'hidden'}>

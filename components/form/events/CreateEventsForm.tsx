@@ -151,8 +151,8 @@ export default function CreateEventsForm(params: { token: any }) {
                 </Box >
                 <Flex justifyContent={'end'} mt={10}>
                     <Button type='submit' colorScheme='blue' isLoading={isLoading}>
-                        <Box mr={2}><FaNewspaper /></Box>
-                        Add News</Button>
+                        <Box mr={2}></Box>
+                        Add Event</Button>
                 </Flex>
 
 
