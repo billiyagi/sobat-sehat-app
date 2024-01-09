@@ -7,55 +7,80 @@ import { FaBookmark } from "react-icons/fa6";
 import { getCookie } from 'typescript-cookie';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
+import { jwtDecode } from 'jwt-decode';
 
-export default function EventsCard(params: { name: string, date: string, slug: string, thumbnail: string, userId: number, eventId: number, token: string }) {
+export default function EventsCard(params: { name: string, date: string, slug: string, thumbnail: string, userId: number, eventId: any }) {
+    const toast = useToast();
 
-
+    const [token, setToken]: any = useState(false);
     const [isRegistered, setIsRegistered]: any = useState(false);
     const [user, setUser]: any = useState({});
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     // Check if user is registered
     useEffect(() => {
+        const token: any = getCookie('token');
+        setToken(token);
+        setUser(token ? jwtDecode(token) : {});
 
-        if (params.token) {
+        if (token) {
             axios({
                 method: 'get',
                 url: `${process.env.NEXT_PUBLIC_API_URL}/registered/${params.eventId}`,
                 headers: {
-                    Authorization: `Bearer ${params.token}`
+                    Authorization: `Bearer ${token}`
                 }
             }).then((response) => {
                 if (response.data.status) {
                     setIsRegistered(true);
                 }
             }).catch((error) => {
-                console.log(error);
+                toast({
+                    title: 'Terjadi kesalahan',
+                    status: 'error',
+                    duration: 9000,
+                    isClosable: true,
+                    position: 'top-right'
+                })
             });
         }
 
 
-    }, [params]);
-
-    const handleRegister = async (e: any) => {
+    }, [params, token, toast]);
 
 
-        try {
-            const response = await axios({
-                method: 'post',
-                url: `${process.env.NEXT_PUBLIC_API_URL}/register/event`,
-                headers: {
-                    Authorization: `Bearer ${params.token}`
-                },
-                data: {
-                    event_id: params.eventId,
-                    user_id: params.userId
-                }
-            });
-            setIsRegistered(true);
-        } catch (error) {
-            console.log(error);
-        }
+    const handleRegister = (e: any) => {
+
+        e.preventDefault();
+        axios({
+            method: 'post',
+            url: `${process.env.NEXT_PUBLIC_API_URL}/register/event`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            data: {
+                event_id: params.eventId,
+                user_id: user.user.id
+            }
+        }).then((response) => {
+            toast({
+                title: 'Berhasil mendaftar',
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+                position: 'top-right'
+            })
+        }).catch((error) => {
+            toast({
+                title: 'Terjadi kesalahan',
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+                position: 'top-right'
+            })
+        })
+        setIsRegistered(true);
     }
 
     return (
@@ -71,7 +96,7 @@ export default function EventsCard(params: { name: string, date: string, slug: s
                         </Link>
 
                         {/* Daftar Event Button */}
-                        {!params.token ? (
+                        {!token ? (
                             <Box mt={3}>
                                 <Button type='submit' bgColor={'#fba600'} color={'white'} _hover={{ backgroundColor: '#e09502' }} onClick={onOpen}>
                                     <Text mr={2}><FaBookmark /></Text>

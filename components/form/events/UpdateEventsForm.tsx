@@ -40,7 +40,6 @@ export default function UpdateEventsForm(params: { token: any, eventsId: any }) 
                 Authorization: `Bearer ${params.token.value}`
             }
         }).then((response) => {
-            console.log(response.data.data)
             setEvents(response.data.data)
         }).catch((error) => {
             toast({
@@ -60,7 +59,6 @@ export default function UpdateEventsForm(params: { token: any, eventsId: any }) 
         e.preventDefault();
         setIsLoading(true)
         const { name, thumbnail, start_at, end_at, link_location, location_at } = e.currentTarget;
-        console.log(thumbnail.files[0])
         try {
             const response = await axios(`${process.env.NEXT_PUBLIC_API_URL}/events/${params.eventsId}`, {
                 method: 'POST',
@@ -92,7 +90,6 @@ export default function UpdateEventsForm(params: { token: any, eventsId: any }) 
             setIsLoading(false)
             router.push('/dashboard/events')
         } catch (error: any) {
-            console.log(error.response)
             setIsLoading(false)
             if (error) {
                 setError({
@@ -180,8 +177,8 @@ export default function UpdateEventsForm(params: { token: any, eventsId: any }) 
                         </Box >
                         <Flex justifyContent={'end'} mt={10}>
                             <Button type='submit' colorScheme='blue' isLoading={isLoading}>
-                                <Box mr={2}><FaNewspaper /></Box>
-                                Add News</Button>
+                                <Box mr={2}></Box>
+                                Edit Events</Button>
                         </Flex>
 
 

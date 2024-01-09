@@ -70,7 +70,6 @@ export default function RegisterForm() {
                     <Input
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
-                        placeholder='Enter password'
                         name='password'
                         required
                     />

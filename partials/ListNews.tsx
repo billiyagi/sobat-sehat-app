@@ -1,4 +1,3 @@
-"use client"
 import React, { useEffect } from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
 import NewsVerticalCard from '@/components/card/news/NewsVerticalCard'
@@ -6,7 +5,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { getCookie } from 'typescript-cookie'
 
-export default function ListNews(params: { dataNews: any }) {
+export default async function ListNews(params: { dataNews: any }) {
 
     return (
         <>
