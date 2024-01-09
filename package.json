@@ -19,6 +19,7 @@
     "@tanstack/react-table": "^8.11.2",
     "@tinymce/tinymce-react": "^4.3.2",
     "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.2",
     "apexcharts": "^3.45.1",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
